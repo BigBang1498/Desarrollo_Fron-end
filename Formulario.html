@@ -1,0 +1,37 @@
+<html>
+    <head></head>
+    <body>
+        <form action="ejemplo.php" method="get">
+            <p>Usuario:<br>
+              <input type="text" name="Usuario" />
+            </p>
+            <p>Motivación para aprender el idioma:<br>
+                <input type="checkbox" id="option1" name="option1" value="option1">
+                <label for="option1"> Quiero aprender nuevas culturas.</label><br>
+                <input type="checkbox" id="option2" name="option2" value="option2">
+                <label for="option2">Quiero tener mejores oportunidades profesionales.</label><br>
+                <input type="checkbox" id="option3" name="option3" value="option3">
+                <label for="option3">Lo quiero hacer como pasatiempo</label><br>
+                <input type="checkbox" id="options4" name="options4" value="options4">
+                <label for="options4">Quiero mejorar mis habilidades Academicas</label><br>
+                <input type="checkbox" id="option5" name="option5" value="option5">
+                <label for="option5">Quiero aprobar mi clase de Lengua Extrajera.</label><br>
+            </p>
+            <label for="cars">Selecciona el idioma que deseas aprender:</label><br>
+            <select id="Idiomas" name="Idiomas">
+                <option value="Ingles">Ingles</option>
+                <option value="Español">Español</option>
+                <option value="Frances">Frances</option>
+                <option value="Italiano">Italiano</option>
+                <option value="Portugues">Portugues</option>
+            </select>
+            <p><button type="button" onclick="validar()">Enviar</button></p> 
+        </form>
+        <script type="text/javascript">
+            function validar() {
+                // Pon tu código aquí...
+                alert("Pon tu código aquí!");
+            }
+        </script>
+    </body>
+</html>
