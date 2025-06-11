@@ -2,13 +2,47 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Formulario con Validación</title>
+  <title>Formulario con Catálogo Dinámico y Validaciones Avanzadas</title>
   <style>
+    /* Estilos de validación */
     .invalid { border-color: red; color: red; }
     .valid   { border-color: green; color: green; }
+
+    /* Estilos para el catálogo */
+    #catalogo {
+      margin-top: 30px;
+      max-width: 500px;
+    }
+    #catalogo h2 {
+      margin-bottom: 10px;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+    .registro {
+      border: 1px solid #ccc;
+      padding: 12px;
+      margin-bottom: 12px;
+      border-radius: 4px;
+      background: #f9f9f9;
+      font-family: Arial, sans-serif;
+    }
+    .registro h4 {
+      margin: 0 0 8px;
+      font-size: 1.1em;
+      color: #222;
+    }
+    .registro p {
+      margin: 4px 0;
+      font-size: 0.95em;
+    }
+    .registro strong {
+      display: inline-block;
+      width: 90px;
+    }
   </style>
 </head>
 <body>
+
   <form id="miFormulario" action="#" method="get" onsubmit="return false;">
     <p>
       <label id="labelUsuario" for="Usuario">Usuario:</label><br>
@@ -30,16 +64,16 @@
       <label id="labelIdiomas" for="Idiomas">Selecciona el idioma que deseas aprender:</label><br>
       <select id="Idiomas" name="Idiomas">
         <option value="">-- Elige un idioma --</option>
-        <option value="Ingles">Inglés</option>
+        <option value="Inglés">Inglés</option>
         <option value="Español">Español</option>
-        <option value="Frances">Francés</option>
+        <option value="Francés">Francés</option>
         <option value="Italiano">Italiano</option>
-        <option value="Portugues">Portugués</option>
+        <option value="Portugués">Portugués</option>
       </select>
     </p>
     <p>
       <span id="labelMotivacion">Motivación para aprender el idioma:</span><br>
-      <input type="checkbox" id="option1" name="motivacion" value=x"culturas">
+      <input type="checkbox" id="option1" name="motivacion" value="culturas">
       <label for="option1">Quiero aprender nuevas culturas.</label><br>
       <input type="checkbox" id="option2" name="motivacion" value="oportunidades">
       <label for="option2">Quiero tener mejores oportunidades profesionales.</label><br>
@@ -55,9 +89,13 @@
     </p>
   </form>
 
+  <section id="catalogo">
+    <h2>Catálogo de registros</h2>
+  </section>
+
   <script>
-    function validar() {
-      // Limpiamos estilos anteriores
+       function validar() {
+      // 1) Limpiar estilos previos
       const camposTexto = ['Usuario','Email','Telefono'];
       camposTexto.forEach(id => {
         const el = document.getElementById(id);
@@ -73,57 +111,142 @@
       document.getElementById('labelMotivacion').classList.remove('invalid','valid');
 
       let formularioValido = true;
+      let mensajesError = [];
 
-      // textfields: no vacíos
-      camposTexto.forEach(id => {
-        const el = document.getElementById(id);
-        const label = document.getElementById('label' + id);
-        if (!el.value.trim()) {
-          el.classList.add('invalid');
-          label.classList.add('invalid');
-          formularioValido = false;
-        } else {
-          el.classList.add('valid');
-          label.classList.add('valid');
-        }
-      });
+      // Validar Usuario (no vacío)
+      const usuarioEl = document.getElementById('Usuario');
+      const usuarioLabel = document.getElementById('labelUsuario');
+      if (!usuarioEl.value.trim()) {
+        usuarioEl.classList.add('invalid');
+        usuarioLabel.classList.add('invalid');
+        formularioValido = false;
+        mensajesError.push('El campo Usuario no debe estar vacío.');
+      } else {
+        usuarioEl.classList.add('valid');
+        usuarioLabel.classList.add('valid');
+      }
 
-      // Textarea: no vacío
+      // Validar Email (no vacío y formato)
+      const emailEl = document.getElementById('Email');
+      const emailLabel = document.getElementById('labelEmail');
+      const emailVal = emailEl.value.trim();
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailVal) {
+        emailEl.classList.add('invalid');
+        emailLabel.classList.add('invalid');
+        formularioValido = false;
+        mensajesError.push('El campo Email no debe estar vacío.');
+      } else if (!emailPattern.test(emailVal)) {
+        emailEl.classList.add('invalid');
+        emailLabel.classList.add('invalid');
+        formularioValido = false;
+        mensajesError.push('El formato del correo electrónico es inválido.');
+      } else {
+        emailEl.classList.add('valid');
+        emailLabel.classList.add('valid');
+      }
+
+      // Validar Teléfono (no vacío y solo dígitos)
+      const telEl = document.getElementById('Telefono');
+      const telLabel = document.getElementById('labelTelefono');
+      const telVal = telEl.value.trim();
+      const telPattern = /^\d+$/;
+      if (!telVal) {
+        telEl.classList.add('invalid');
+        telLabel.classList.add('invalid');
+        formularioValido = false;
+        mensajesError.push('El campo Teléfono no debe estar vacío.');
+      } else if (!telPattern.test(telVal)) {
+        telEl.classList.add('invalid');
+        telLabel.classList.add('invalid');
+        formularioValido = false;
+        mensajesError.push('El teléfono debe ser numérico.');
+      } else {
+        telEl.classList.add('valid');
+        telLabel.classList.add('valid');
+      }
+
+      //  Validar textarea (no vacío)
       if (!textarea.value.trim()) {
         textarea.classList.add('invalid');
         document.getElementById('labelComentario').classList.add('invalid');
         formularioValido = false;
+        mensajesError.push('El campo Descríbete no debe estar vacío.');
       } else {
         textarea.classList.add('valid');
         document.getElementById('labelComentario').classList.add('valid');
       }
 
-      // debe elegir una opción
+      //  Validar select (debe elegir una opción)
       if (!select.value) {
         select.classList.add('invalid');
         document.getElementById('labelIdiomas').classList.add('invalid');
         formularioValido = false;
+        mensajesError.push('Debes seleccionar un idioma.');
       } else {
         select.classList.add('valid');
         document.getElementById('labelIdiomas').classList.add('valid');
       }
 
-      // Checkbox: al menos uno marcado
+      //  Validar checkboxes (al menos uno marcado)
       const checkboxes = document.querySelectorAll('input[name="motivacion"]');
       const alguno = Array.from(checkboxes).some(cb => cb.checked);
       if (!alguno) {
-        // si falla, etiquetamos todo el grupo
         document.getElementById('labelMotivacion').classList.add('invalid');
         formularioValido = false;
+        mensajesError.push('Debes seleccionar al menos una motivación.');
       } else {
         document.getElementById('labelMotivacion').classList.add('valid');
       }
 
+      //  Resultado
       if (formularioValido) {
-        alert('¡Formulario válido!');
+        agregarRegistro();
+        alert('¡Formulario válido! Registro añadido al catálogo.');
       } else {
-        alert('Por favor, corrige los campos resaltados.');
+        alert(mensajesError.join('\n'));
       }
+    }
+
+    function agregarRegistro() {
+      // Recoger datos
+      const usuario    = document.getElementById('Usuario').value.trim();
+      const email      = document.getElementById('Email').value.trim();
+      const telefono   = document.getElementById('Telefono').value.trim();
+      const comentario = document.getElementById('Comentario').value.trim();
+      const idioma     = document.getElementById('Idiomas').value;
+      const motivos = Array.from(
+        document.querySelectorAll('input[name="motivacion"]:checked')
+      ).map(cb => cb.nextElementSibling.textContent);
+
+      // Crear contenedor del registro
+      const registro = document.createElement('div');
+      registro.classList.add('registro');
+
+      // Título
+      const titulo = document.createElement('h4');
+      titulo.textContent = `${usuario} — ${idioma}`;
+      registro.appendChild(titulo);
+
+      // Campos a mostrar
+      const campos = [
+        ['Email', email],
+        ['Teléfono', telefono],
+        ['Comentario', comentario],
+        ['Motivación', motivos.join(', ') || '—']
+      ];
+      campos.forEach(([etiqueta, valor]) => {
+        const p = document.createElement('p');
+        p.innerHTML = `<strong>${etiqueta}:</strong> ${valor}`;
+        registro.appendChild(p);
+      });
+
+      // Insertar al final del catálogo
+      document.getElementById('catalogo').appendChild(registro);
+
+      // Limpiar formulario y estilos de validación
+      document.getElementById('miFormulario').reset();
+      document.querySelectorAll('.valid').forEach(el => el.classList.remove('valid'));
     }
   </script>
 </body>
