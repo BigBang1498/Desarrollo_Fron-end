@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Formulario con Catálogo Dinámico</title>
   <style>
-    /* Reset ligero */
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -19,6 +19,42 @@
       justify-content: center;
       padding: 20px;
     }
+
+    #clearAll {
+      display: block;
+      margin: 0 auto 16px;
+      padding: 8px 16px;
+      background: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    #clearAll:hover {
+      background: #a71d2a;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 8px 16px;
+      background: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .delete-btn:hover {
+      background: #a71d2a;
+    }
+
 
     /* Tarjeta del formulario */
     .card {
@@ -128,6 +164,7 @@
     }
 
     .registro {
+      position: relative;
       background: #fff;
       border: 1px solid #e1e4e8;
       border-radius: 6px;
@@ -217,11 +254,20 @@
 
     <section id="catalogo">
       <h2>Catálogo de registros</h2>
-      <!-- aquí se insertan dinámicamente -->
+      <button id="clearAll">Borrar todo</button>
     </section>
   </div>
 
   <script>
+
+    const catalogo = document.getElementById('catalogo');
+    const clearAllBtn = document.getElementById('clearAll');
+
+    // Limpia todos los registros
+    clearAllBtn.addEventListener('click', () => {
+      catalogo.querySelectorAll('.registro').forEach(r => r.remove());
+    });
+
     function validar() {
       // 1) Limpiar estilos previos
       const camposTexto = ['Usuario', 'Email', 'Telefono'];
@@ -291,8 +337,6 @@
       if (formularioValido) {
         agregarRegistro();
         alert('¡Formulario válido! Registro añadido al catálogo.');
-        agregarRegistro();
-        alert('¡Formulario válido! Registro añadido al catálogo.');
       } else {
         alert('Por favor, corrige los campos resaltados.');
       }
@@ -315,6 +359,14 @@
       // Crear contenedor del registro
       const registro = document.createElement('div');
       registro.classList.add('registro');
+
+      // Botón borrar individual
+      const del = document.createElement('button');
+      del.classList.add('delete-btn');
+      del.type = 'button';
+      del.textContent = 'Eliminar';
+      del.addEventListener('click', () => registro.remove());
+      registro.appendChild(del);
 
       // Título
       const titulo = document.createElement('h4');
