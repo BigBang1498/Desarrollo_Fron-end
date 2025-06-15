@@ -1,0 +1,158 @@
+/* Reset ligero */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: #f5f7fa;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Tarjeta del formulario */
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  width: 100%;
+  padding: 30px;
+}
+
+.card h1 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+/* Grupos de campo */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #555;
+  transition: color 0.2s;
+}
+
+.form-group input[type="text"],
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Validación */
+.valid { border-color: #28a745 !important; }
+.valid + label, label.valid { color: #28a745 !important; }
+.invalid { border-color: #dc3545 !important; }
+.invalid + label, label.invalid { color: #dc3545 !important; }
+
+/* Grupo de checkboxes */
+.checkbox-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.checkbox-group label { margin-left: 4px; }
+
+/* Botón principal */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: #007bff;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn:hover { background: #0056b3; }
+
+/* Catálogo */
+#catalogo {
+  margin-top: 30px;
+}
+#catalogo h2 {
+  margin-bottom: 12px;
+  color: #333;
+  font-size: 1.3rem;
+  text-align: center;
+}
+#clearAll {
+  display: block;
+  margin: 0 auto 16px;
+  padding: 8px 16px;
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#clearAll:hover { background: #a71d2a; }
+
+/* Registros individuales */
+.registro {
+  position: relative;
+  background: #fff;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+.registro h4 {
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+  color: #222;
+}
+.registro p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+.registro strong {
+  display: inline-block;
+  width: 90px;
+  color: #555;
+}
+
+/* Botón borrar individual */
+.delete-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 8px 16px;
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.delete-btn:hover {
+  background: #a71d2a;
+}

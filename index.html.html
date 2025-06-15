@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario con Catálogo Dinámico</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="card">
+    <h1>Registro de Aprendizaje de Idiomas</h1>
+    <form id="miFormulario" onsubmit="return false;">
+      <div class="form-group">
+        <label id="labelUsuario" for="Usuario">Usuario</label>
+        <input type="text" id="Usuario" placeholder="Usuario" />
+      </div>
+      <div class="form-group">
+        <label id="labelEmail" for="Email">Email</label>
+        <input type="text" id="Email" placeholder="Correo electrónico" />
+      </div>
+      <div class="form-group">
+        <label id="labelTelefono" for="Telefono">Teléfono</label>
+        <input type="text" id="Telefono" placeholder="Teléfono" />
+      </div>
+      <div class="form-group">
+        <label id="labelComentario" for="Comentario">Descríbete</label>
+        <textarea id="Comentario" placeholder="Descríbete..."></textarea>
+      </div>
+      <div class="form-group">
+        <label id="labelIdiomas" for="Idiomas">Idioma</label>
+        <select id="Idiomas">
+          <option value="">-- Elige un idioma --</option>
+          <option value="Inglés">Inglés</option>
+          <option value="Español">Español</option>
+          <option value="Francés">Francés</option>
+          <option value="Italiano">Italiano</option>
+          <option value="Portugués">Portugués</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label id="labelMotivacion">Motivación para aprender:</label>
+        <div class="checkbox-group">
+          <div><input type="checkbox" id="option1" name="motivacion" value="culturas"><label for="option1">Nuevas culturas</label></div>
+          <div><input type="checkbox" id="option2" name="motivacion" value="oportunidades"><label for="option2">Oportunidades profesionales</label></div>
+          <div><input type="checkbox" id="option3" name="motivacion" value="pasatiempo"><label for="option3">Pasatiempo</label></div>
+          <div><input type="checkbox" id="option4" name="motivacion" value="academicas"><label for="option4">Habilidades académicas</label></div>
+          <div><input type="checkbox" id="option5" name="motivacion" value="aprobar"><label for="option5">Aprobar mi clase</label></div>
+        </div>
+      </div>
+      <button type="button" class="btn" onclick="validar()">Enviar</button>
+    </form>
+
+    <section id="catalogo">
+      <h2>Catálogo de registros</h2>
+      <button id="clearAll">Borrar todo</button>
+      <!-- aquí se insertan dinámicamente los .registro -->
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
