@@ -259,6 +259,7 @@
         textarea.classList.add('invalid');
         document.getElementById('labelComentario').classList.add('invalid');
         formularioValido = false;
+        mensajesError.push('El campo Descríbete no debe estar vacío.');
       } else {
         textarea.classList.add('valid');
         document.getElementById('labelComentario').classList.add('valid');
@@ -269,6 +270,7 @@
         select.classList.add('invalid');
         document.getElementById('labelIdiomas').classList.add('invalid');
         formularioValido = false;
+        mensajesError.push('Debes seleccionar un idioma.');
       } else {
         select.classList.add('valid');
         document.getElementById('labelIdiomas').classList.add('valid');
@@ -280,12 +282,15 @@
       if (!alguno) {
         document.getElementById('labelMotivacion').classList.add('invalid');
         formularioValido = false;
+        mensajesError.push('Debes seleccionar al menos una motivación.');
       } else {
         document.getElementById('labelMotivacion').classList.add('valid');
       }
 
       // 6) Si todo es válido, agregamos el registro; si no, mostramos alerta
       if (formularioValido) {
+        agregarRegistro();
+        alert('¡Formulario válido! Registro añadido al catálogo.');
         agregarRegistro();
         alert('¡Formulario válido! Registro añadido al catálogo.');
       } else {
